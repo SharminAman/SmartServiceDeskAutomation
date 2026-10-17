@@ -44,8 +44,22 @@ def database_config() -> DatabaseConfig:
 def database_url() -> str:
     explicit = os.getenv("DATABASE_URL", "").strip()
     if explicit:
-        return explicit
+        return _for_psycopg(explicit)
     config = database_config()
+    if os.getenv("RAILWAY_ENVIRONMENT") and config.host in {"127.0.0.1", "localhost"}:
+        raise RuntimeError(
+            "The Railway app service is missing its database address. "
+            "Open the app service, Variables, and set DATABASE_URL to a reference of the Postgres service DATABASE_URL."
+        )
     user = quote_plus(config.user)
     password = quote_plus(config.password)
     return f"postgresql+psycopg://{user}:{password}@{config.host}:{config.port}/{config.name}"
+
+
+def _for_psycopg(url: str) -> str:
+    """Railway supplies postgresql://. This app uses the psycopg driver."""
+    if url.startswith("postgres://"):
+        return "postgresql+psycopg://" + url[len("postgres://") :]
+    if url.startswith("postgresql://"):
+        return "postgresql+psycopg://" + url[len("postgresql://") :]
+    return url
