@@ -148,11 +148,8 @@ export function Requests() {
           <button className="btn" onClick={reanalyse} disabled={busy}>
             Re-run analysis
           </button>
-          <button className="btn" onClick={() => setUploading(true)}>
+          <button className="btn primary" onClick={() => setUploading(true)}>
             Upload CSV
-          </button>
-          <button className="btn primary" onClick={() => setCreating(true)}>
-            New request
           </button>
         </div>
       </header>

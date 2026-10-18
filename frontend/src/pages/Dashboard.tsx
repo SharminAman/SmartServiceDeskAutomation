@@ -26,11 +26,8 @@ export function Dashboard() {
           <h1>The queue, already read.</h1>
         </div>
         <div className="actions">
-          <Link className="btn" to="/requests">
+          <Link className="btn primary" to="/requests">
             Open requests
-          </Link>
-          <Link className="btn primary" to="/requests?new=1">
-            New request
           </Link>
         </div>
       </header>
