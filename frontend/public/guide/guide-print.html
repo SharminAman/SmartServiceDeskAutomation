@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Request Desk user guide</title>
+  <style>
+    @page { size: A4; margin: 14mm 14mm 16mm; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: #171910;
+      font-family: "Segoe UI", Calibri, sans-serif;
+      font-size: 12pt;
+      line-height: 1.45;
+    }
+    h1 { margin: 0 0 8px; font-size: 28pt; line-height: 1.05; font-weight: 650; }
+    h2 { margin: 0 0 8px; font-size: 16.5pt; line-height: 1.2; }
+    p { margin: 0 0 8px; }
+    ol { margin: 6px 0 10px; padding-left: 1.25em; }
+    li { margin: 3px 0; }
+    .kicker { letter-spacing: 0.14em; text-transform: uppercase; font-size: 9pt; font-weight: 700; color: #5e5a51; }
+    .lead { font-size: 13pt; max-width: 42em; }
+    .account {
+      margin-top: 14px;
+      padding: 12px 14px;
+      background: #d7ee63;
+      border: 2px solid #171910;
+    }
+    .account p { margin: 2px 0; }
+    .account strong { font-size: 14pt; }
+    .task { break-before: page; }
+    figure { margin: 10px 0 0; }
+    img { width: 100%; height: auto; border: 1px solid #cfc6b6; }
+    figcaption { margin-top: 5px; color: #5e5a51; font-size: 10pt; }
+  </style>
+</head>
+<body>
+  <p class="kicker">Request Desk</p>
+  <h1>User guide</h1>
+  <p class="lead">Request Desk reads a spreadsheet of service requests and works through six tasks. The requests are synthetic examples. Nothing is sent outside this desk.</p>
+  <div class="account">
+    <p>Sign in with this account</p>
+    <p>Username <strong>admin</strong></p>
+    <p>Password <strong>RequestDesk!2026</strong></p>
+  </div>
+  <p>Open the desk, enter that username and password, and choose <strong>Enter the desk</strong>. The six tasks below are what the desk does after you sign in.</p>
+
+  <section class="task">
+    <p class="kicker">Task 1</p>
+    <h2>Read requests from a spreadsheet</h2>
+    <p>The desk reads at least five synthetic requests from a CSV file. The sample file has ten requests, numbered REQ-001 to REQ-010.</p>
+    <ol>
+      <li>Choose <strong>Requests</strong>.</li>
+      <li>Choose <strong>Upload CSV</strong>.</li>
+      <li>Drop the spreadsheet onto the window, or click the window and choose the file.</li>
+      <li>Choose <strong>Upload and analyse</strong>.</li>
+    </ol>
+    <p>Each row becomes one request. A new request ID is added. An ID that is already on the desk is updated and read again. You can also add a single request with <strong>New request</strong>.</p>
+    <p>The file needs these columns: Request ID, Submitted Date, Requester Role, Request Type, Request Summary, Priority, Channel, and Status.</p>
+    <figure>
+      <img src="upload.png" alt="The Upload requests window, with a place to drop a CSV file." />
+      <figcaption>Upload CSV opens this window. Choose the spreadsheet, then Upload and analyse.</figcaption>
+    </figure>
+  </section>
+
+  <section class="task">
+    <p class="kicker">Task 2</p>
+    <h2>Check that required information is present</h2>
+    <p>As soon as a row is read, the desk checks that the required information is there and valid.</p>
+    <ol>
+      <li>Request ID, written like REQ-001.</li>
+      <li>Submitted date, written as DD/MM/YYYY.</li>
+      <li>Requester role.</li>
+      <li>Request type, from the allowed list.</li>
+      <li>A request summary.</li>
+      <li>Priority, channel, and status, each from the allowed list.</li>
+    </ol>
+    <p>If a field is blank or not valid, that request is marked. On the request table, choose <strong>Missing information</strong> to see only those rows. In the sample shown here, every row is complete, so that list is empty.</p>
+    <figure>
+      <img src="table.png" alt="The request table, including the Missing information filter." />
+      <figcaption>Missing information shows rows that failed the check. The other rows have already been read.</figcaption>
+    </figure>
+  </section>
+
+  <section class="task">
+    <p class="kicker">Task 3</p>
+    <h2>Categorise each request using simple rules</h2>
+    <p>The desk reads the summary and looks for keywords. The first matching rule sets the category.</p>
+    <ol>
+      <li>Open <strong>Rules</strong>.</li>
+      <li>Read the categories from top to bottom. The first keyword found in the summary wins.</li>
+      <li>On the request table, the line under the category shows the keyword that matched, such as “via access”.</li>
+    </ol>
+    <p>The starter rules are: Access &amp; Permissions (access, permission, collaborator); System Integration (connect, synchronise, sync); Process Automation (automate, automated, reminder); Reporting &amp; Analytics (dashboard, summary, engagement, analytics); Content &amp; Guidance (guide, template, publish, announcement). If no keyword matches, the category is Uncategorised.</p>
+    <figure>
+      <img src="rules.png" alt="The rules page, with categories and their keywords." />
+      <figcaption>Rules you can change. The order on this page is the order the desk uses.</figcaption>
+    </figure>
+  </section>
+
+  <section class="task">
+    <p class="kicker">Task 4</p>
+    <h2>Produce a suggested acknowledgement</h2>
+    <p>Every request gets a short reply, in the same spirit as “We have received your request.”</p>
+    <ol>
+      <li>On the request table, select a request ID.</li>
+      <li>Read <strong>Suggested acknowledgement</strong> on the card.</li>
+      <li>Use that sentence as the reply. Choose <strong>Close</strong> to return to the table.</li>
+    </ol>
+    <p>REQ-004 is answered with: “We have received REQ-004. Your System Integration request is logged and will be reviewed.” If required information is missing, the reply names the missing fields.</p>
+    <figure>
+      <img src="case.png" alt="The request card for REQ-004, including the suggested acknowledgement." />
+      <figcaption>The suggested acknowledgement sits on the request card, under the reasons.</figcaption>
+    </figure>
+  </section>
+
+  <section class="task">
+    <p class="kicker">Task 5</p>
+    <h2>Identify requests that need a person</h2>
+    <p>The column <strong>Human intervention needed?</strong> shows only Yes or No. Yes means a person should look at the request.</p>
+    <p>A request is marked Yes when any of these is true:</p>
+    <ol>
+      <li>Required information is missing or not valid.</li>
+      <li>The summary did not match a category, or it matches a different category from the one on the form.</li>
+      <li>The priority is High.</li>
+      <li>The status is Completed.</li>
+      <li>The summary uses a sensitive phrase, such as finance or expenses.</li>
+    </ol>
+    <p>Select the request ID to see why. A red heading, <strong>A person must see this</strong>, lists the reasons. A green heading means no person is needed. On the queue, <strong>Needs a person</strong> shows how many requests are marked Yes.</p>
+    <figure>
+      <img src="case.png" alt="REQ-004 marked for a person, with three numbered reasons." />
+      <figcaption>REQ-004 needs a person because the priority is High and the summary mentions finance and expenses.</figcaption>
+    </figure>
+  </section>
+
+  <section class="task">
+    <p class="kicker">Task 6</p>
+    <h2>Create an output file and a summary</h2>
+    <p>The desk keeps two results: a summary on the screen, and a file you can save.</p>
+    <ol>
+      <li>The request queue shows how many requests are stored, how many need a person, how many match their category, and how many are missing information.</li>
+      <li>Choose <strong>Requests</strong>.</li>
+      <li><strong>Download view</strong> saves the rows currently on the screen.</li>
+      <li><strong>Download all</strong> saves every request. The file includes the category, the rule that matched, any missing fields, the suggested acknowledgement, whether a person is needed, and why.</li>
+    </ol>
+    <p>That downloaded file is the result of the six tasks.</p>
+    <figure>
+      <img src="desk.png" alt="The request queue, with counts for stored requests, review, category, and missing information." />
+      <figcaption>The queue is the summary. Download all, on the request table, saves the full result file.</figcaption>
+    </figure>
+  </section>
+</body>
+</html>
