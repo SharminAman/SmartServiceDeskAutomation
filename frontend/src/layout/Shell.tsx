@@ -34,6 +34,9 @@ export function Shell({ user, onLogout }: { user: User; onLogout: () => void }) 
           <NavLink to="/requests" onClick={() => setOpen(false)}>
             Requests
           </NavLink>
+          <NavLink to="/guide" onClick={() => setOpen(false)}>
+            Guide
+          </NavLink>
           <NavLink to="/admin" onClick={() => setOpen(false)}>
             Rules
           </NavLink>
