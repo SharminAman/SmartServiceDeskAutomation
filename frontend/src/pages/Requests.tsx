@@ -148,8 +148,11 @@ export function Requests() {
           <button className="btn" onClick={reanalyse} disabled={busy}>
             Re-run analysis
           </button>
-          <button className="btn primary" onClick={() => setUploading(true)}>
+          <button className="btn" onClick={() => setUploading(true)}>
             Upload CSV
+          </button>
+          <button className="btn primary" onClick={() => setCreating(true)}>
+            New request
           </button>
         </div>
       </header>
@@ -372,7 +375,7 @@ export function Requests() {
               <label className="field">
                 <span>Request type</span>
                 <select value={form.request_type} onChange={(event) => setForm({ ...form, request_type: event.target.value })}>
-                  <option value="">Unset</option>
+                  <option value="">Select</option>
                   {meta?.request_types.map((item) => (
                     <option key={item}>{item}</option>
                   ))}
@@ -381,7 +384,7 @@ export function Requests() {
               <label className="field">
                 <span>Priority</span>
                 <select value={form.priority} onChange={(event) => setForm({ ...form, priority: event.target.value })}>
-                  <option value="">Unset</option>
+                  <option value="">Select</option>
                   {meta?.priorities.map((item) => (
                     <option key={item}>{item}</option>
                   ))}
@@ -390,7 +393,7 @@ export function Requests() {
               <label className="field">
                 <span>Channel</span>
                 <select value={form.channel} onChange={(event) => setForm({ ...form, channel: event.target.value })}>
-                  <option value="">Unset</option>
+                  <option value="">Select</option>
                   {meta?.channels.map((item) => (
                     <option key={item}>{item}</option>
                   ))}
@@ -399,7 +402,7 @@ export function Requests() {
               <label className="field">
                 <span>Status</span>
                 <select value={form.status} onChange={(event) => setForm({ ...form, status: event.target.value })}>
-                  <option value="">Unset</option>
+                  <option value="">Select</option>
                   {meta?.statuses.map((item) => (
                     <option key={item}>{item}</option>
                   ))}

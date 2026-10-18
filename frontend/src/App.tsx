@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { api, setUnauthorized } from "./api";
+import { GuideFile } from "./components/GuideFile";
 import { Shell } from "./layout/Shell";
 import { Admin } from "./pages/Admin";
 import { Dashboard } from "./pages/Dashboard";
@@ -21,6 +22,8 @@ export function App() {
   if (user === undefined) return <div className="splash">Request Desk</div>;
 
   return (
+    <>
+    <GuideFile />
     <Routes>
       <Route path="/login" element={user ? <Navigate to="/" replace /> : <Login onSuccess={setUser} />} />
       <Route element={user ? <Shell user={user} onLogout={() => setUser(null)} /> : <Navigate to="/login" replace />}>
@@ -30,5 +33,6 @@ export function App() {
       </Route>
       <Route path="*" element={<Navigate to={user ? "/" : "/login"} replace />} />
     </Routes>
+    </>
   );
 }

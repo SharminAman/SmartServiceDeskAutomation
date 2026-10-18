@@ -34,9 +34,6 @@ export function Shell({ user, onLogout }: { user: User; onLogout: () => void }) 
           <NavLink to="/requests" onClick={() => setOpen(false)}>
             Requests
           </NavLink>
-          <a href="/guide/Request-Desk-user-guide.html" download="Request-Desk-user-guide.html">
-            Guide
-          </a>
           <NavLink to="/admin" onClick={() => setOpen(false)}>
             Rules
           </NavLink>

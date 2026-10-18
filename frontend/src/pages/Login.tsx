@@ -1,11 +1,10 @@
 import { FormEvent, useState } from "react";
 import { api } from "../api";
-import { GuideFile } from "../components/GuideFile";
 import type { User } from "../types";
 
 export function Login({ onSuccess }: { onSuccess: (user: User) => void }) {
   const [username, setUsername] = useState("admin");
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("RequestDesk!2026");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
 
@@ -62,7 +61,6 @@ export function Login({ onSuccess }: { onSuccess: (user: User) => void }) {
               <span>Process automation · overdue reminders</span>
             </article>
           </div>
-          <GuideFile />
         </div>
         <p className="lede">Synthetic requests only. One admin. Rules live in PostgreSQL.</p>
       </section>
@@ -71,6 +69,17 @@ export function Login({ onSuccess }: { onSuccess: (user: User) => void }) {
           <div className="kicker">Admin desk</div>
           <h2>Sign in</h2>
           <p className="hint">The queue and the rules are both behind this login.</p>
+          <div className="sign-in-account">
+            <p>Use this account</p>
+            <p>
+              <span>Username</span>
+              <strong>admin</strong>
+            </p>
+            <p>
+              <span>Password</span>
+              <strong>RequestDesk!2026</strong>
+            </p>
+          </div>
           <label className="field">
             <span>Username</span>
             <input value={username} onChange={(event) => setUsername(event.target.value)} autoComplete="username" />
@@ -88,9 +97,6 @@ export function Login({ onSuccess }: { onSuccess: (user: User) => void }) {
           <button className="btn primary wide" disabled={busy}>
             {busy ? "Signing in…" : "Enter the desk"}
           </button>
-          <p className="demo-note">
-            Local demo account <code>admin</code> · <code>RequestDesk!2026</code>
-          </p>
         </form>
       </section>
     </main>

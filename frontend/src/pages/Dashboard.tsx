@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../api";
-import { GuideFile } from "../components/GuideFile";
 import type { DashboardData } from "../types";
 
 function reasonTitle(label: string): string {
@@ -65,7 +64,6 @@ export function Dashboard() {
           <h1>Request queue</h1>
         </div>
         <div className="actions">
-          <GuideFile />
           <Link className="btn primary" to="/requests">
             Open requests
           </Link>
@@ -169,7 +167,7 @@ export function Dashboard() {
               <strong>{item.category}</strong>
               <p>{item.request_summary || "No summary"}</p>
             </div>
-            <span className="pill warn">{item.priority || "Unset"}</span>
+            <span className="pill warn">{item.priority || "—"}</span>
           </Link>
         ))}
       </section>

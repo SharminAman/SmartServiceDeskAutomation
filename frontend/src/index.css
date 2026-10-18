@@ -152,17 +152,27 @@ a { color: inherit; }
   padding: 12px 14px;
 }
 .field textarea { min-height: 96px; resize: vertical; }
-.demo-note {
-  margin-top: 16px;
-  color: #5e5a51;
-  font-size: 0.86rem;
+.sign-in-account {
+  display: grid;
+  gap: 8px;
+  margin: 0 0 18px;
+  padding: 14px 16px;
+  background: #d7ee63;
+  color: #171910;
+  border: 2px solid #171910;
+  border-radius: 16px;
 }
-.demo-note code {
-  font-family: "Outfit", sans-serif;
-  background: #efe8da;
-  padding: 1px 6px;
-  border-radius: 6px;
+.sign-in-account p { margin: 0; display: grid; gap: 2px; }
+.sign-in-account p:first-child {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
+.sign-in-account span { font-weight: 600; font-size: 0.86rem; }
+.sign-in-account strong { font-size: 1.35rem; letter-spacing: -0.02em; }
 
 .btn {
   border: 1px solid #171910;
@@ -211,7 +221,7 @@ a { color: inherit; }
 .mobile-bar { display: none; }
 
 .main { min-width: 0; }
-.page { padding: 28px 32px 56px; }
+.page { padding: 72px 32px 56px; }
 .page-head {
   display: grid;
   gap: 14px;
@@ -530,36 +540,22 @@ tr.clickable:hover, tr.selected { background: #fffdf8; }
   position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: white; display: block;
 }
 .switch button[role="switch"][aria-checked="true"] i { left: 21px; }
-.attachment {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  width: min(420px, 100%);
-  margin-top: 18px;
-  padding: 12px 14px;
-  background: #f7f4ee;
-  color: #171910;
-  border-radius: 16px;
-  text-decoration: none;
-  box-shadow: 6px 6px 0 #171910;
-}
-.attachment i {
-  flex: 0 0 auto;
-  width: 46px;
-  height: 52px;
-  border-radius: 8px;
-  background: #8c2b1c;
-  color: #fff8f4;
-  display: grid;
-  place-items: center;
-  font-style: normal;
-  font-size: 0.72rem;
+.download-guide {
+  position: fixed;
+  top: 16px;
+  right: 20px;
+  z-index: 40;
+  background: #171910;
+  color: #d7ee63;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  font-size: 1.05rem;
+  line-height: 1;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  padding: 14px 18px;
+  border-radius: 999px;
+  box-shadow: 4px 4px 0 #d7ee63;
 }
-.attachment strong, .attachment small { display: block; }
-.attachment small { color: #5e5a51; margin-top: 2px; }
-.page .attachment { margin-top: 0; }
 
 .empty { padding: 48px 20px; text-align: center; }
 .empty h2 { font-family: "Fraunces", Georgia, serif; font-size: 2rem; margin-bottom: 6px; }
@@ -573,6 +569,7 @@ tr.clickable:hover, tr.selected { background: #fffdf8; }
   .mobile-bar { display: block; padding: 12px 14px 0; }
   .menu-btn { display: inline-flex; }
   .stats, .layout, .grid-2 { grid-template-columns: 1fr; }
-  .page { padding: 18px 14px 40px; }
+  .page { padding: 72px 14px 40px; }
+  .download-guide { top: 10px; right: 10px; font-size: 0.95rem; padding: 12px 14px; }
   .page-head { flex-direction: column; align-items: stretch; }
 }

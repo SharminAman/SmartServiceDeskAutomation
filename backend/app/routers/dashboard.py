@@ -21,7 +21,7 @@ def dashboard(db: Session = Depends(get_db), _: AdminUser = Depends(current_user
             reason_counts[reason] += 1
 
     def grouped(attr: str) -> list[dict]:
-        counts: Counter[str] = Counter(getattr(row, attr) or "Unset" for row in rows)
+        counts: Counter[str] = Counter(getattr(row, attr) or "Not set" for row in rows)
         return [{"label": label, "count": count} for label, count in counts.most_common()]
 
     review_rows = [row for row in rows if row.needs_human_review]
