@@ -3,9 +3,46 @@ import { Link } from "react-router-dom";
 import { api } from "../api";
 import type { DashboardData } from "../types";
 
+function reasonTitle(label: string): string {
+  const phrase = label.match(/sensitive phrase:\s*(.+)/i) || label.match(/mentions "([^"]+)"/i);
+  if (phrase) return `Sensitive: ${phrase[1].replace(/[."]+$/g, "").trim()}`;
+  const text = label.toLowerCase();
+  if (text.includes("high priority") || text.includes("priority is high")) return "High priority";
+  if (text.includes("completed")) return "Already completed";
+  if (text.includes("missing")) return "Missing or invalid information";
+  if (text.includes("no category") || text.includes("did not match")) return "No category matched";
+  if (text.includes("looks like") || text.includes("category")) return "Category does not match";
+  return label;
+}
+
+function reasonLine(label: string): string {
+  const phrase = label.match(/sensitive phrase:\s*(.+)/i);
+  if (phrase) {
+    return `The summary mentions "${phrase[1].replace(/[."]+$/g, "").trim()}", which this desk treats as sensitive.`;
+  }
+  const quoted = label.match(/mentions "([^"]+)"/i);
+  if (quoted) return `The summary mentions "${quoted[1]}", which this desk treats as sensitive.`;
+  const missing = label.match(/missing or invalid:\s*(.+)/i);
+  if (missing) return `${missing[1].replace(/\.+$/g, "").trim()} is missing or not valid.`;
+  const text = label.toLowerCase();
+  if (text.includes("high priority") || text.includes("priority is high")) {
+    return "The priority on the request is High.";
+  }
+  if (text.includes("completed")) {
+    return "The request is already marked Completed, so a new acknowledgement may not be appropriate.";
+  }
+  if (text.includes("no category") || text.includes("did not match any category")) {
+    return "The summary did not match a category rule, so no category could be chosen.";
+  }
+  const stripped = label.replace(/^A person needs to look at this because\s+/i, "");
+  const sentence = stripped.charAt(0).toUpperCase() + stripped.slice(1);
+  return sentence.endsWith(".") ? sentence : `${sentence}.`;
+}
+
 export function Dashboard() {
   const [data, setData] = useState<DashboardData | null>(null);
   const [error, setError] = useState("");
+  const [reasonIndex, setReasonIndex] = useState(0);
 
   useEffect(() => {
     api<DashboardData>("/api/dashboard")
@@ -17,13 +54,14 @@ export function Dashboard() {
   if (!data) return <div className="page">Opening the desk…</div>;
 
   const today = new Date().toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long" });
+  const chosenReason = data.review_reasons[Math.min(reasonIndex, Math.max(0, data.review_reasons.length - 1))];
 
   return (
     <div className="page">
       <header className="page-head">
         <div>
           <div className="kicker">{today}</div>
-          <h1>The queue, already read.</h1>
+          <h1>Request queue</h1>
         </div>
         <div className="actions">
           <Link className="btn primary" to="/requests">
@@ -81,25 +119,41 @@ export function Dashboard() {
         </article>
         <article className="panel">
           <h2>Why a person is needed</h2>
-          {data.review_reasons.length === 0 ? <p className="hint">Nothing is waiting.</p> : null}
-          {data.review_reasons.map((item) => (
-            <div className="reason" key={item.label}>
-              <span>{item.label}</span>
-              <strong>{item.count}</strong>
-            </div>
-          ))}
-          <h2 style={{ marginTop: 22 }}>Rules in force</h2>
-          <div className="rule-rail">
+          {chosenReason ? (
+            <ul className="reason-picks">
+              {data.review_reasons.map((item, index) => {
+                const open = item === chosenReason;
+                return (
+                  <li key={item.label}>
+                    <button
+                      type="button"
+                      className={open ? "on" : ""}
+                      aria-expanded={open}
+                      onClick={() => setReasonIndex(index)}
+                    >
+                      <span>{reasonTitle(item.label)}</span>
+                      <strong>{item.count}</strong>
+                    </button>
+                    {open ? <p>{reasonLine(item.label)}</p> : null}
+                  </li>
+                );
+              })}
+            </ul>
+          ) : (
+            <p className="hint">Nothing is waiting for a person.</p>
+          )}
+          <h2 className="panel-next">Rules in force</h2>
+          <ol className="rule-rail">
             {data.rules.map((rule, index) => (
-              <div key={rule.category}>
+              <li className="rule-item" key={rule.category}>
                 <i>{index + 1}</i>
                 <div>
                   <strong>{rule.category}</strong>
                   <small>{rule.enabled ? rule.keywords.join(" · ") : "Turned off"}</small>
                 </div>
-              </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </article>
       </section>
 
