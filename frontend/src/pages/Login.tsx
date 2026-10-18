@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
-import { Link } from "react-router-dom";
 import { api } from "../api";
+import { GuideFile } from "../components/GuideFile";
 import type { User } from "../types";
 
 export function Login({ onSuccess }: { onSuccess: (user: User) => void }) {
@@ -62,6 +62,7 @@ export function Login({ onSuccess }: { onSuccess: (user: User) => void }) {
               <span>Process automation · overdue reminders</span>
             </article>
           </div>
+          <GuideFile />
         </div>
         <p className="lede">Synthetic requests only. One admin. Rules live in PostgreSQL.</p>
       </section>
@@ -89,9 +90,6 @@ export function Login({ onSuccess }: { onSuccess: (user: User) => void }) {
           </button>
           <p className="demo-note">
             Local demo account <code>admin</code> · <code>RequestDesk!2026</code>
-          </p>
-          <p className="demo-note">
-            <Link to="/">Read the user guide</Link>. No sign-in is required.
           </p>
         </form>
       </section>
